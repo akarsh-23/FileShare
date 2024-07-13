@@ -1,1 +1,4 @@
-<p>file-upload works!</p>
+<div class="m-auto" style="width: fit-content;">
+    <button style="background-color: #03045E; color: #CAF0F8;" type="button" mat-stroked-button (click)="fileInput.click()">Upload</button>
+    <input hidden (change)="uploadImages($event)" #fileInput type="file" id="file" [formControl]="files" multiple>
+</div>
