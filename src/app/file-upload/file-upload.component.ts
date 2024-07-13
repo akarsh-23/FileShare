@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon'
 
 @Component({
   selector: 'app-file-upload',
@@ -11,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     FormsModule,
     MatButtonModule,
+    MatIconModule,
     ReactiveFormsModule
   ],
   templateUrl: './file-upload.component.html',
@@ -22,7 +24,7 @@ export class FileUploadComponent {
 
   constructor(private fileUploadService: FileUploadService, private snackBar: MatSnackBar) { } 
 
-  uploadImages(event:any){
+  uploadFiles(event:any){
     console.log("Uploading image")
     if(this.files.valid){
       this.fileUploadService.uploadImage(this.user_id, event.target.files).subscribe(

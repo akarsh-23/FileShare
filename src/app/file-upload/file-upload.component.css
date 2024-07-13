@@ -1,0 +1,13 @@
+.upload-buttons {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .5rem;
+    width: fit-content;
+    margin: auto;
+}
+
+.button-wrapper {
+    display: flex;
+    align-items: center;
+}

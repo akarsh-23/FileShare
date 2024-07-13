@@ -1,4 +1,16 @@
-<div class="m-auto" style="width: fit-content;">
-    <button style="background-color: #03045E; color: #CAF0F8;" type="button" mat-stroked-button (click)="fileInput.click()">Upload</button>
-    <input hidden (change)="uploadImages($event)" #fileInput type="file" id="file" [formControl]="files" webkitdirectory directory multiple>
+<div class="upload-buttons">
+    <div class="button-wrapper">
+        <button type="button" mat-stroked-button (click)="fileInput.click()">
+            <mat-icon>upload_file</mat-icon>File upload
+        </button>
+        <input type="file" hidden #fileInput [formControl]="files" (change)="uploadFiles($event)" multiple
+            aria-label="File upload">
+    </div>
+    <div class="button-wrapper">
+        <button type="button" mat-stroked-button (click)="folderInput.click()">
+            <mat-icon>drive_folder_upload</mat-icon>Folder upload
+        </button>
+        <input type="file" hidden #folderInput [formControl]="files" (change)="uploadFiles($event)" webkitdirectory
+            directory multiple aria-label="Folder upload">
+    </div>
 </div>
