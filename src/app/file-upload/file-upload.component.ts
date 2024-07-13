@@ -3,12 +3,14 @@ import { FileUploadService } from '../file-upload.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-file-upload',
   standalone: true,
   imports: [
     FormsModule,
+    MatButtonModule,
     ReactiveFormsModule
   ],
   templateUrl: './file-upload.component.html',
