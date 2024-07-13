@@ -17,6 +17,7 @@
         }
     },
     "auth": {
+        "rolesSource": "/api/roles",
         "identityProviders": {
             "google": {
                 "registration": {
