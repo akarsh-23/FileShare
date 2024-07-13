@@ -1,17 +1,29 @@
 {
     "navigationFallback": {
-      "rewrite": "/index.html"
+        "rewrite": "/index.html"
     },
     "routes": [
-      {
-        "route": "/*",
-        "allowedRoles": [ "authenticated" ]
-      }
+        {
+            "route": "/*",
+            "allowedRoles": [
+                "authenticated"
+            ]
+        }
     ],
     "responseOverrides": {
-      "401": {
-        "statusCode": 302,
-        "redirect": "/.auth/login/aad"
-      }
+        "401": {
+            "statusCode": 302,
+            "redirect": "/.auth/login/google"
+        }
+    },
+    "auth": {
+        "identityProviders": {
+            "google": {
+                "registration": {
+                    "clientIdSettingName": "GOOGLE_CLIENT_ID",
+                    "clientSecretSettingName": "GOOGLE_CLIENT_SECRET_APP_SETTING_NAME"
+                }
+            }
+        }
     }
-  }
+}
