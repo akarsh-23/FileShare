@@ -55,13 +55,14 @@ export class FileUploadComponent {
   uploadFiles(event:any){
     console.log("Uploading image")
     if(this.files.valid){
+      this.uploadInProgress = true;
+      
       this.fileUploadService.uploadFiles(this.user_id, event.target.files).then(result => {
         console.log('Upload successful', result);
-        this.snackBar.open('Your files has been uploaded successfully!', 'Close', {
-          duration: 3000, // Duration in milliseconds (optional)
-        });
+        this.snackBar.open('Your files has been uploaded successfully!', 'Close');
       }).catch(error => {
         console.error('Upload failed', error);
+        this.snackBar.open('Failed to upload your files!', 'Close');
       }).finally(() => {
         this.uploadInProgress = false;
       });
