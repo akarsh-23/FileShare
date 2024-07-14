@@ -6,8 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class FileUploadService {
   private apiUrl = '/api';
-  private worker!:Worker;
-
+  worker: Worker;
   private progressSubject = new Subject<number>(); // Subject for progress updates
 
   constructor() { 

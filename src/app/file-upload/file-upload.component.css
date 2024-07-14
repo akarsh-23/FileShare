@@ -1,10 +1,14 @@
+.upload-components{
+    width: fit-content;
+    padding: .5rem;
+    margin: auto;
+}
+
 .upload-buttons {
     display: flex;
     align-items: center;
     gap: .5rem;
-    padding: .5rem;
     width: fit-content;
-    margin: auto;
 }
 
 .button-wrapper {
@@ -15,5 +19,8 @@
 @media (max-width: 768px) {
     .folder-upload {
         display: none; 
+    }
+    .upload-buttons{
+        gap: 0;
     }
 }
