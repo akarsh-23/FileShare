@@ -4,9 +4,15 @@
     },
     "routes": [
         {
-            "route": "/*",
+            "route": "/upload",
             "allowedRoles": [
                 "authenticated"
+            ]
+        },
+        {
+            "route": "/*",
+            "allowedRoles": [
+                "anonymous"
             ]
         }
     ],
