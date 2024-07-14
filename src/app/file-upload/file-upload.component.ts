@@ -27,17 +27,14 @@ export class FileUploadComponent {
   uploadFiles(event:any){
     console.log("Uploading image")
     if(this.files.valid){
-      this.fileUploadService.uploadImage(this.user_id, event.target.files).subscribe(
-        (data)=>{
-          console.log("Upload success:", data)
-          this.snackBar.open('Your files has been uploaded successfully!', 'Close', {
-            duration: 3000, // Duration in milliseconds (optional)
-          });
-        },
-        (error)=>{
-          console.error("Upload error:", error)
-        }
-      )
+      this.fileUploadService.uploadImage(this.user_id, event.target.files).then(result => {
+        console.log('Upload successful', result);
+        this.snackBar.open('Your files has been uploaded successfully!', 'Close', {
+          duration: 3000, // Duration in milliseconds (optional)
+        });
+      }).catch(error => {
+        console.error('Upload failed', error);
+      });
     }
   }
 }

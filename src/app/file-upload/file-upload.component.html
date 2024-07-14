@@ -1,12 +1,12 @@
 <div class="upload-buttons">
-    <div class="button-wrapper">
+    <div class="button-wrapper file-upload">
         <button type="button" mat-stroked-button (click)="fileInput.click()">
             <mat-icon>upload_file</mat-icon>File upload
         </button>
         <input type="file" hidden #fileInput [formControl]="files" (change)="uploadFiles($event)" multiple
             aria-label="File upload">
     </div>
-    <div class="button-wrapper">
+    <div class="button-wrapper folder-upload">
         <button type="button" mat-stroked-button (click)="folderInput.click()">
             <mat-icon>drive_folder_upload</mat-icon>Folder upload
         </button>
