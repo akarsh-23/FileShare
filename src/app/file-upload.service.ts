@@ -14,14 +14,17 @@ export class FileUploadService {
         // Create a new web worker
         const worker = new Worker(new URL('./file-upload.worker', import.meta.url));
 
-        // Prepare formData
-        const formData: FormData = new FormData();
+        // Convert files to serializable format
+        const fileData = [];
         for (let i = 0; i < files.length; i++) {
-          formData.append(files[i].name, files[i], files[i].name);
+          fileData.push({
+            name: files[i].name,
+            content: files[i]
+          });
         }
 
         // Send data to the worker
-        worker.postMessage({ apiUrl: this.apiUrl, id, formData });
+        worker.postMessage({ apiUrl: this.apiUrl, id, files: fileData });
 
         // Listen for messages from the worker
         worker.onmessage = ({ data }) => {

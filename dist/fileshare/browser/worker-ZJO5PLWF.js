@@ -1,0 +1,1 @@
+addEventListener("message",({data:e})=>{let t=e.files,o=e.apiUrl,a=e.id,n=new FormData;t.forEach(s=>{n.append(s.name,s.content,s.name)}),fetch(`${o}/upload/${a}/images`,{method:"POST",body:n}).then(s=>s.json()).then(s=>{postMessage({success:!0,result:s})}).catch(s=>{postMessage({success:!1,error:s})})});

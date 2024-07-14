@@ -1,1 +1,0 @@
-addEventListener("message",({data:e})=>{let t=e.formData,a=e.apiUrl,o=e.id;fetch(`${a}/upload/${o}/images`,{method:"POST",body:t}).then(s=>s.json()).then(s=>{postMessage({success:!0,result:s})}).catch(s=>{postMessage({success:!1,error:s})})});
