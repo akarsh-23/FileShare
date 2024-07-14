@@ -5,21 +5,34 @@ addEventListener('message', ({ data }) => {
   const apiUrl: string = data.apiUrl;
   const id: string = data.id;
 
-  // Reconstruct FormData
   const formData = new FormData();
   files.forEach(file => {
     formData.append(file.name, file.content, file.name);
   });
 
-  fetch(`${apiUrl}/upload/${id}/images`, {
-    method: 'POST',
-    body: formData,
-  })
-    .then(response => response.json())
-    .then(result => {
+  const xhr = new XMLHttpRequest();
+
+  xhr.open('POST', `${apiUrl}/upload/${id}/images`, true);
+
+  xhr.upload.onprogress = (event) => {
+    if (event.lengthComputable) {
+      const percentComplete = Math.round((event.loaded / event.total) * 100);
+      postMessage({ progress: percentComplete });
+    }
+  };
+
+  xhr.onload = () => {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      const result = JSON.parse(xhr.responseText);
       postMessage({ success: true, result });
-    })
-    .catch(error => {
-      postMessage({ success: false, error });
-    });
+    } else {
+      postMessage({ success: false, error: xhr.statusText });
+    }
+  };
+
+  xhr.onerror = () => {
+    postMessage({ success: false, error: xhr.statusText });
+  };
+
+  xhr.send(formData);
 });

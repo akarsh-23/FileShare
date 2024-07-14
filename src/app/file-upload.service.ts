@@ -5,15 +5,15 @@ import { Injectable } from '@angular/core';
 })
 export class FileUploadService {
   private apiUrl = '/api';
+  private worker!:Worker;
+  constructor() { 
+    // Create a new web worker
+    this.worker = new Worker(new URL('./file-upload.worker', import.meta.url));
+  }
 
-  constructor() { }
-
-  uploadImage(id: string, files: FileList): Promise<any> {
+  uploadFiles(id: string, files: FileList): Promise<any> {
     return new Promise((resolve, reject) => {
       if (typeof Worker !== 'undefined') {
-        // Create a new web worker
-        const worker = new Worker(new URL('./file-upload.worker', import.meta.url));
-
         // Convert files to serializable format
         const fileData = [];
         for (let i = 0; i < files.length; i++) {
@@ -24,19 +24,24 @@ export class FileUploadService {
         }
 
         // Send data to the worker
-        worker.postMessage({ apiUrl: this.apiUrl, id, files: fileData });
+        this.worker.postMessage({ apiUrl: this.apiUrl, id, files: fileData });
 
         // Listen for messages from the worker
-        worker.onmessage = ({ data }) => {
-          if (data.success) {
+        this.worker.onmessage = ({ data }) => {
+          if (data.progress !== undefined) {
+            // Handle progress updates
+            console.log(data.progress)
+          } else if (data.success) {
+            // Resolve promise on successful upload
             resolve(data.result);
           } else {
+            // Reject promise on error
             reject(data.error);
           }
         };
 
         // Handle worker errors
-        worker.onerror = (error) => {
+        this.worker.onerror = (error) => {
           reject(error);
         };
       } else {
