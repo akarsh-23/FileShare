@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -6,6 +7,9 @@ import { Injectable } from '@angular/core';
 export class FileUploadService {
   private apiUrl = '/api';
   private worker!:Worker;
+
+  private progressSubject = new Subject<number>(); // Subject for progress updates
+
   constructor() { 
     // Create a new web worker
     this.worker = new Worker(new URL('./file-upload.worker', import.meta.url));
@@ -29,8 +33,8 @@ export class FileUploadService {
         // Listen for messages from the worker
         this.worker.onmessage = ({ data }) => {
           if (data.progress !== undefined) {
-            // Handle progress updates
-            console.log(data.progress)
+            // Notify subscribers about progress updates
+            this.progressSubject.next(data.progress);
           } else if (data.success) {
             // Resolve promise on successful upload
             resolve(data.result);
@@ -50,4 +54,10 @@ export class FileUploadService {
       }
     });
   }
+
+  // Method to subscribe to progress updates
+  getProgressObservable() {
+    return this.progressSubject.asObservable();
+  }
+
 }

@@ -5,6 +5,9 @@ import { FormControl } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon'
+import { Subscription } from 'rxjs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-file-upload',
@@ -13,7 +16,9 @@ import { MatIconModule } from '@angular/material/icon'
     FormsModule,
     MatButtonModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressBarModule,
+    CommonModule
   ],
   templateUrl: './file-upload.component.html',
   styleUrl: './file-upload.component.css'
@@ -25,7 +30,27 @@ export class FileUploadComponent {
   message: string = '';
   uploadInProgress: boolean = false;
 
-  constructor(private fileUploadService: FileUploadService, private snackBar: MatSnackBar) { } 
+  private progressSubscription: Subscription | undefined;
+
+  constructor(private fileUploadService: FileUploadService, private snackBar: MatSnackBar) { 
+    // Subscribe to progress updates
+    this.progressSubscription = this.fileUploadService.getProgressObservable().subscribe(
+      progress => {
+        this.progress = progress;
+        this.message = `Upload progress: ${this.progress}%`;
+      },
+      error => {
+        console.error('Progress subscription error:', error);
+      }
+    );
+  } 
+
+  ngOnDestroy() {
+    // Unsubscribe from progress updates to avoid memory leaks
+    if (this.progressSubscription) {
+      this.progressSubscription.unsubscribe();
+    }
+  }
 
   uploadFiles(event:any){
     console.log("Uploading image")
@@ -37,6 +62,8 @@ export class FileUploadComponent {
         });
       }).catch(error => {
         console.error('Upload failed', error);
+      }).finally(() => {
+        this.uploadInProgress = false;
       });
     }
   }

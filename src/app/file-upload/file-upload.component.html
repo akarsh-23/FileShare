@@ -13,4 +13,8 @@
         <input type="file" hidden #folderInput [formControl]="files" (change)="uploadFiles($event)" webkitdirectory
             directory multiple aria-label="Folder upload">
     </div>
+    <div *ngIf="uploadInProgress">
+        <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+        <p>{{ message }}</p>
+    </div>
 </div>
