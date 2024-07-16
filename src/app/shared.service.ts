@@ -5,10 +5,16 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SharedService {
-  private sidenavState = new BehaviorSubject<boolean>(false);
-  sidenavState$ = this.sidenavState.asObservable();
+  private leftSidenavState = new BehaviorSubject<boolean>(false);
+  leftSidenavState$ = this.leftSidenavState.asObservable();
 
-  toggleSidenav() {
-    this.sidenavState.next(!this.sidenavState.value);
+  private rightSidenavState = new BehaviorSubject<boolean>(false);
+  rightSidenavState$ = this.rightSidenavState.asObservable();
+
+  toggleLeftSidenav() {
+    this.leftSidenavState.next(!this.leftSidenavState.value);
+  }
+  toggleRightSidenav() {
+    this.rightSidenavState.next(!this.rightSidenavState.value);
   }
 }

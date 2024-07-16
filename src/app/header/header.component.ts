@@ -19,10 +19,15 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent {
   constructor(private sharedService: SharedService) {}
-  state = false;
+  leftSidenavstate = false;
+  rightSidenavstate = false;
 
-  toggleSidenav() {
-    this.sharedService.toggleSidenav();
-    this.state = !this.state;
+  toggleLeftSidenav() {
+    this.sharedService.toggleLeftSidenav();
+    this.leftSidenavstate = !this.leftSidenavstate;
+  }
+  toggleRightSidenav() {
+    this.sharedService.toggleRightSidenav();
+    this.rightSidenavstate = !this.rightSidenavstate;
   }
 }

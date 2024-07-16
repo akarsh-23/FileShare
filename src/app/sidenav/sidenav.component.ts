@@ -2,30 +2,62 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenav, MatSidenavModule} from '@angular/material/sidenav';
 import { SharedService } from '../shared.service';
+import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../auth.service';
+import { error } from 'console';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-sidenav',
   standalone: true,
   imports: [
     MatButtonModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatIconModule
   ],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.css'
 })
 export class SidenavComponent implements OnInit  {
+  user:any;
 
-  @ViewChild('drawer') drawer!: MatSidenav;
+  @ViewChild('leftdrawer') leftdrawer!: MatSidenav;
+  @ViewChild('rightdrawer') rightdrawer!: MatSidenav;
 
-  constructor(private sharedService: SharedService) {}
+  constructor(private sharedService: SharedService, private authService: AuthService, private userService: UserService) {}
 
   ngOnInit(): void{
-    this.sharedService.sidenavState$.subscribe((state: boolean) => {
-      if (state) {
-        this.drawer.open();
+    this.userService.getUser().subscribe((user) => {
+      if (user) {
+        this.user = user
+        console.log(user)
       } else {
-        this.drawer.close();
+        console.log("unable to get the user")
       }
     });
+
+    this.sharedService.leftSidenavState$.subscribe((state: boolean) => {
+      if (state) {
+        this.leftdrawer.open();
+      } else {
+        this.leftdrawer.close();
+      }
+    });
+
+    this.sharedService.rightSidenavState$.subscribe((state: boolean) => {
+      if (state) {
+        this.rightdrawer.open();
+      } else {
+        this.rightdrawer.close();
+      }
+    });
+  }
+
+  login(){
+    this.authService.login()
+  }
+
+  logout(){
+    this.authService.logout()
   }
 }

@@ -1,0 +1,12 @@
+.sidenav{
+    width: fit-content;
+}
+
+button{
+    display: block;
+}
+
+.no-border-radius{
+    border-radius: 0px;
+    width: 100%;
+}
