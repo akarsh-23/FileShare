@@ -11,13 +11,13 @@ export class AuthService {
   private user_id:any;
 
   constructor(private http: HttpClient, private router: Router) {
-    this.getAuthPrincipal().subscribe((authPrincipal)=>{
+    this.getAuthPrincipal().then((authPrincipal) => {
       this.user_id = authPrincipal.clientPrincipal.userId;
     })
   }
 
-  getAuthPrincipal():Observable<any> {
-    return this.http.get<any>(this.meUrl);
+  async getAuthPrincipal():Promise<any> {
+    return await this.http.get<any>(this.meUrl);
   }
 
   getUserId(): any{
