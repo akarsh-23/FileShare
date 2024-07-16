@@ -11,16 +11,15 @@ export class UserService {
   private userURL = '/user';
   user_id:any;
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient, private authService: AuthService) {}
+
+  getUser(): Observable<any> {
     this.authService.getUser().subscribe((user)=>{
       if(user){
         console.log(user)
         this.user_id = user.clientPrincipal.userId;
       }
     })
-  }
-
-  getUser(): Observable<any> {
     return this.http.get<any>(`${this.userURL}/${this.user_id}`);
   }
 }
