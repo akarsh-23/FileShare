@@ -26,10 +26,14 @@ export class SidenavComponent implements OnInit  {
   @ViewChild('rightdrawer') rightdrawer!: MatSidenav;
 
   constructor(private sharedService: SharedService, private authService: AuthService, private userService: UserService) {
-    this.user_id = this.authService.getUserId()
+    this.authService.getAuthPrincipal().subscribe((authPrincipal)=>{
+      this.user_id = authPrincipal.clientPrincipal.userId
+      console.log(authPrincipal.clientPrincipal.userId)
+    })
   }
 
   ngOnInit(): void{
+    console.log(`on init ${this.user_id}`)
     this.userService.getUser(this.user_id).subscribe((user) => {
       if (user) {
         this.user = user

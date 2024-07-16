@@ -12,13 +12,8 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  getUserId():any {
-    console.log("getting user id from auth.");
-    const response = this.http.get<any>(this.meUrl);
-    response.subscribe((authContract)=>{
-      console.log(authContract.clientPrincipal.userId);
-      return authContract.clientPrincipal.userId;
-    })
+  getAuthPrincipal():Observable<any> {
+    return this.http.get<any>(this.meUrl);
   }
 
   login(){
