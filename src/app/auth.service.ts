@@ -12,6 +12,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   getUser(): Observable<any> {
+    console.log("getting user from auth.")
     return this.http.get<any>(this.meUrl);
   }
 

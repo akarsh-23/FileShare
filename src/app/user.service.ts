@@ -14,6 +14,7 @@ export class UserService {
   constructor(private http: HttpClient, private authService: AuthService) {
     this.authService.getUser().subscribe((user)=>{
       if(user){
+        console.log(user)
         this.user_id = user.clientPrincipal.userId;
       }
     })
