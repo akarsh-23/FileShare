@@ -13,14 +13,11 @@ export class AuthService {
   }
 
   getUserId():any {
-    console.log("getting user from auth.")
+    console.log("getting user id from auth.");
     const response = this.http.get<any>(this.meUrl);
-    var userId;
     response.subscribe((authContract)=>{
-      userId = authContract.clientPrincipal.userId;
-      if(userId){
-        return userId
-      }
+      console.log(authContract.clientPrincipal.userId);
+      return authContract.clientPrincipal.userId;
     })
   }
 

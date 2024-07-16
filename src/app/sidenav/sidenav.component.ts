@@ -20,15 +20,17 @@ import { UserService } from '../user.service';
 })
 export class SidenavComponent implements OnInit  {
   user:any;
+  user_id: any;
 
   @ViewChild('leftdrawer') leftdrawer!: MatSidenav;
   @ViewChild('rightdrawer') rightdrawer!: MatSidenav;
 
-  constructor(private sharedService: SharedService, private authService: AuthService, private userService: UserService) {}
+  constructor(private sharedService: SharedService, private authService: AuthService, private userService: UserService) {
+    this.user_id = this.authService.getUserId()
+  }
 
   ngOnInit(): void{
-    
-    this.userService.getUser(this.authService.getUserId()).subscribe((user) => {
+    this.userService.getUser(this.user_id).subscribe((user) => {
       if (user) {
         this.user = user
       } else {
