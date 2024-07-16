@@ -9,11 +9,18 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private meUrl = '/.auth/me';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+    this.getUserId()
+  }
 
-  getUser(): Observable<any> {
+  getUserId():any {
     console.log("getting user from auth.")
-    return this.http.get<any>(this.meUrl);
+    const response = this.http.get<any>(this.meUrl);
+    var userId;
+    response.subscribe((authContract)=>{
+      userId = authContract.clientPrincipal.userId;
+    })
+    return userId;
   }
 
   login(){

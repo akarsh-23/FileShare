@@ -9,20 +9,10 @@ import { AuthService } from './auth.service';
 })
 export class UserService {
   private userURL = '/user';
-  user_id:any;
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient) {}
 
-  getUser(): Observable<any> {
-    this.authService.getUser().subscribe((user)=>{
-      if(user){
-        console.log(user)
-        this.user_id = user.clientPrincipal.userId;
-        console.log(this.user_id)
-      }
-    })
-    const url = `${this.userURL}/${this.user_id}`
-    console.log(url)
-    return this.http.get<any>(url);
+  getUser(user_id:any): Observable<any> {
+    return this.http.get<any>(`${this.userURL}/${user_id}`);
   }
 }

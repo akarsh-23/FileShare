@@ -27,10 +27,10 @@ export class SidenavComponent implements OnInit  {
   constructor(private sharedService: SharedService, private authService: AuthService, private userService: UserService) {}
 
   ngOnInit(): void{
-    this.userService.getUser().subscribe((user) => {
+    
+    this.userService.getUser(this.authService.getUserId()).subscribe((user) => {
       if (user) {
         this.user = user
-        console.log(user)
       } else {
         console.log("unable to get the user")
       }
