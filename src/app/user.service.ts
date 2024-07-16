@@ -18,6 +18,7 @@ export class UserService {
       if(user){
         console.log(user)
         this.user_id = user.clientPrincipal.userId;
+        console.log(this.user_id)
       }
     })
     return this.http.get<any>(`${this.userURL}/${this.user_id}`);
