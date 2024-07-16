@@ -1,0 +1,13 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "fileshare": {
+      "appLocation": ".",
+      "outputLocation": "dist\\fileshare\\browser",
+      "appBuildCommand": "ng build",
+      "run": "ng serve",
+      "appDevserverUrl": "http://localhost:4200",
+      "apiDevserverUrl": "http://localhost:7071"
+    }
+  }
+}

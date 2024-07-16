@@ -10,7 +10,6 @@ export class AuthService {
   private meUrl = '/.auth/me';
 
   constructor(private http: HttpClient, private router: Router) {
-    this.getUserId()
   }
 
   getUserId():any {
@@ -19,7 +18,9 @@ export class AuthService {
     var userId;
     response.subscribe((authContract)=>{
       userId = authContract.clientPrincipal.userId;
+
     })
+    console.log(userId)
     return userId;
   }
 
