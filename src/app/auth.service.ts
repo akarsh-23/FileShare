@@ -18,11 +18,10 @@ export class AuthService {
     var userId;
     response.subscribe((authContract)=>{
       userId = authContract.clientPrincipal.userId;
-      console.log(userId)
-      console.log(authContract.clientPrincipal.userId)
+      if(userId){
+        return userId
+      }
     })
-    console.log(userId)
-    return userId;
   }
 
   login(){
