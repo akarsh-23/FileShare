@@ -13,7 +13,7 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUser(user_id:any): Observable<any> {
-    console.log("getting user from user service")
+    console.log(`getting user: ${user_id} from user service`)
     return this.http.get<any>(`${this.userURL}/${user_id}`);
   }
 }
