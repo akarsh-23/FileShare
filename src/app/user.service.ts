@@ -21,6 +21,8 @@ export class UserService {
         console.log(this.user_id)
       }
     })
-    return this.http.get<any>(`${this.userURL}/${this.user_id}`);
+    const url = `${this.userURL}/${this.user_id}`
+    console.log(url)
+    return this.http.get<any>(url);
   }
 }
