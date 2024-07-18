@@ -5,6 +5,7 @@ import { SharedService } from '../shared.service';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../auth.service';
 import { UserService } from '../user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidenav',
@@ -12,7 +13,8 @@ import { UserService } from '../user.service';
   imports: [
     MatButtonModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    CommonModule
   ],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.css'
