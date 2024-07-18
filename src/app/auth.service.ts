@@ -11,8 +11,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {  }
 
-  async getAuthPrincipal():Promise<any> {
-    return await firstValueFrom(this.http.get<any>(this.meUrl));
+  getAuthPrincipal():Promise<any> {
+    return firstValueFrom(this.http.get<any>(this.meUrl));
   }
 
   login(){
