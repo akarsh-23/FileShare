@@ -32,6 +32,7 @@ export class SidenavComponent implements OnInit  {
       this.userService.getUser(authPrincipal.clientPrincipal.userId).subscribe((user) => {
         if (user) {
           this.user = user
+          console.log(user)
         } else {
           console.log("unable to get the user")
         }
