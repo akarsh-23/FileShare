@@ -4,7 +4,6 @@ import { MatSidenav, MatSidenavModule} from '@angular/material/sidenav';
 import { SharedService } from '../shared.service';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../auth.service';
-import { error } from 'console';
 import { UserService } from '../user.service';
 
 @Component({
