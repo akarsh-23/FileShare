@@ -17,11 +17,11 @@ export class AuthService {
 
   login(){
     console.log("login")
-    this.router.navigate(["./auth/login/google"])
+    this.router.navigate(["/.auth/login/google"])
   }
 
   logout(){
     console.log("logout")
-    this.router.navigate(["./auth/logout"])
+    this.router.navigate(["/.auth/logout"])
   }
 }

@@ -9,11 +9,30 @@ import { AuthService } from './auth.service';
 })
 export class UserService {
   private userURL = '/api/user';
+  private user:any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  getUser(user_id:any): Observable<any> {
-    console.log(`getting user: ${user_id} from user service`)
-    return this.http.get<any>(`${this.userURL}/${user_id}`);
+  getUser(): any {
+    if(!this.user){
+      this.authService.getAuthPrincipal().then((authPrincipal)=>{
+        if(authPrincipal){
+          this.http.get<any>(`${this.userURL}/${authPrincipal.clientPrincipal.userId}`).subscribe((user) => {
+            if (user) {
+              this.user = user;
+              return user;
+            } else {
+              console.log("unable to get the user")
+              return undefined;
+            }
+          });
+        }else{
+          console.log("Unable to fetch auth principal")
+          return undefined;
+        }
+      })
+    }else{
+      return this.user;
+    }
   }
 }
