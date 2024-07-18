@@ -33,8 +33,10 @@ export class SidenavComponent implements OnInit  {
     this.authService.getAuthPrincipal().then((authPrincipal)=>{
       this.user_id = authPrincipal.clientPrincipal.userId;
     })
-    
-    console.log(`on init ${this.user_id}`)
+  }
+  
+  ngAfterViewInit():void{
+    console.log(`after view init ${this.user_id}`)
     this.userService.getUser(this.user_id).subscribe((user) => {
       if (user) {
         this.user = user
