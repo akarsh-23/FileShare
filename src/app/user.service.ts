@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
 })
 export class UserService {
   private userURL = '/api/user';
-  private user:any;
+  private user:any = undefined;
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -20,6 +20,7 @@ export class UserService {
           this.http.get<any>(`${this.userURL}/${authPrincipal.clientPrincipal.userId}`).subscribe((user) => {
             if (user) {
               this.user = user;
+              console.log(this.user);
               return user;
             } else {
               console.log("unable to get the user")
