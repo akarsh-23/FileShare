@@ -1,27 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private meUrl = '/.auth/me';
-  private user_id:any;
 
-  constructor(private http: HttpClient, private router: Router) {
-    this.getAuthPrincipal().then((authPrincipal) => {
-      this.user_id = authPrincipal.clientPrincipal.userId;
-    })
-  }
+  constructor(private http: HttpClient, private router: Router) {  }
 
   async getAuthPrincipal():Promise<any> {
-    return await this.http.get<any>(this.meUrl);
-  }
-
-  getUserId(): any{
-    return this.user_id
+    return await firstValueFrom(this.http.get<any>(this.meUrl));
   }
 
   login(){
