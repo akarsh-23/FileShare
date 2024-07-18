@@ -1,7 +1,7 @@
 <mat-drawer #leftdrawer class="sidenav" mode="side" position="start">
     <button mat-button class="no-border-radius"><mat-icon>folder_shared</mat-icon>Shared Files</button>
 </mat-drawer>
-<mat-drawer *ngIf="user" #rightdrawer class="sidenav" mode="side" position="end">
+<mat-drawer *ngIf="user$ | async as user" #rightdrawer class="sidenav" mode="side" position="end">
     <div class="profile-container">
         <img [src]="user.picture" alt="profile picture" class="profile">
     </div>

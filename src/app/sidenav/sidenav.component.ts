@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../auth.service';
 import { UserService } from '../user.service';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sidenav',
@@ -20,17 +21,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './sidenav.component.css'
 })
 export class SidenavComponent implements OnInit  {
-  user:any;
+  user$: Observable<any>;
   user_id: any;
 
   @ViewChild('leftdrawer') leftdrawer!: MatSidenav;
   @ViewChild('rightdrawer') rightdrawer!: MatSidenav;
 
-  constructor(private sharedService: SharedService, private authService: AuthService, private userService: UserService) {  }
-
-  ngOnInit(): void{
-    this.user = this.userService.getUser()
-    console.log(`on init ${this.user}`)
+  constructor(private sharedService: SharedService, private authService: AuthService, private userService: UserService) { 
+    this.user$ = this.userService.getUser();
   }
   
   ngAfterViewInit():void{

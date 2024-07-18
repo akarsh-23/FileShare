@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -9,30 +9,27 @@ import { AuthService } from './auth.service';
 })
 export class UserService {
   private userURL = '/api/user';
-  private user:any = undefined;
+  private userSubject = new BehaviorSubject<any>(null);
+  user$ = this.userSubject.asObservable();
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getUser(): any {
-    if(!this.user){
-      this.authService.getAuthPrincipal().then((authPrincipal)=>{
-        if(authPrincipal){
-          this.http.get<any>(`${this.userURL}/${authPrincipal.clientPrincipal.userId}`).subscribe((user) => {
+    this.authService.getAuthPrincipal().then((authPrincipal) => {
+      if (authPrincipal) {
+        this.http.get<any>(`${this.userURL}/${authPrincipal.clientPrincipal.userId}`).pipe(
+          tap((user) => {
             if (user) {
-              this.user = user;
-              return user;
+              this.userSubject.next(user);
             } else {
-              console.log("unable to get the user")
-              return undefined;
+              console.log("Unable to get the user");
             }
-          });
-        }else{
-          console.log("Unable to fetch auth principal")
-          return undefined;
-        }
-      })
-    }else{
-      return this.user;
-    }
+          })
+        ).subscribe();
+      } else {
+        console.log("Unable to fetch auth principal");
+      }
+    });
+    return this.user$;
   }
 }
