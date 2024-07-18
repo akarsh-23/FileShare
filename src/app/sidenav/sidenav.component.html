@@ -2,7 +2,10 @@
     <button mat-button class="no-border-radius"><mat-icon>folder_shared</mat-icon>Shared Files</button>
 </mat-drawer>
 <mat-drawer #rightdrawer class="sidenav" mode="side" position="end">
-    <img [src]="user.picture" alt="profile picture" class="profile">
+    
+    <div class="profile-container">
+        <img [src]="user.picture" alt="profile picture" class="profile">
+    </div>
     <button mat-button class="no-border-radius"><mat-icon>account_circle</mat-icon>{{user.name}}</button>
     <button mat-button class="no-border-radius" (click)="logout()"><mat-icon>exit_to_app</mat-icon>Logout</button>
 </mat-drawer>
