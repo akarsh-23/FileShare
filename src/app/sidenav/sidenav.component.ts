@@ -20,7 +20,7 @@ import { Observable } from 'rxjs';
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.css'
 })
-export class SidenavComponent implements OnInit  {
+export class SidenavComponent  {
   user$: Observable<any>;
   user_id: any;
 
