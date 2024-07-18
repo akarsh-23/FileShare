@@ -25,26 +25,21 @@ export class SidenavComponent implements OnInit  {
   @ViewChild('leftdrawer') leftdrawer!: MatSidenav;
   @ViewChild('rightdrawer') rightdrawer!: MatSidenav;
 
-  constructor(private sharedService: SharedService, private authService: AuthService, private userService: UserService) {
-    console.log(`constructor ${this.user_id}`)
-  }
+  constructor(private sharedService: SharedService, private authService: AuthService, private userService: UserService) {  }
 
   ngOnInit(): void{
     this.authService.getAuthPrincipal().then((authPrincipal)=>{
-      this.user_id = authPrincipal.clientPrincipal.userId;
+      this.userService.getUser(authPrincipal.clientPrincipal.userId).subscribe((user) => {
+        if (user) {
+          this.user = user
+        } else {
+          console.log("unable to get the user")
+        }
+      });
     })
   }
   
   ngAfterViewInit():void{
-    console.log(`after view init ${this.user_id}`)
-    this.userService.getUser(this.user_id).subscribe((user) => {
-      if (user) {
-        this.user = user
-      } else {
-        console.log("unable to get the user")
-      }
-    });
-
     this.sharedService.leftSidenavState$.subscribe((state: boolean) => {
       if (state) {
         this.leftdrawer.open();
