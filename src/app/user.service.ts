@@ -20,7 +20,6 @@ export class UserService {
           this.http.get<any>(`${this.userURL}/${authPrincipal.clientPrincipal.userId}`).subscribe((user) => {
             if (user) {
               this.user = user;
-              console.log(this.user);
               return user;
             } else {
               console.log("unable to get the user")

@@ -30,6 +30,7 @@ export class SidenavComponent implements OnInit  {
 
   ngOnInit(): void{
     this.user = this.userService.getUser()
+    console.log(`on init ${this.user}`)
   }
   
   ngAfterViewInit():void{
