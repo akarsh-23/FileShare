@@ -12,5 +12,5 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'fileshare';
+  title = 'Clearity.AI';
 }
