@@ -1,24 +1,17 @@
 <div class="center-wrapper">
-    <div class="chat-container">
-      <div class="chat-window" #chatWindow>
-        <div *ngFor="let message of messages" class="message" [ngClass]="{ 'user-message': message.user === 'You', 'bot-message': message.user === 'Bot' }">
-          <div class="message-content">
-            <strong>{{ message.user }}:</strong>
-            <p>{{ message.text }}</p>
-          </div>
+  <div class="chat-container">
+    <div class="chat-window" #chatWindow>
+      <div *ngFor="let message of messages" class="message" [ngClass]="{ 'user-message': message.user === 'You', 'bot-message': message.user === 'Bot' }">
+        <div class="message-content">
+          <strong>{{ message.user }}:</strong>
+          <p>{{ message.text }}</p>
         </div>
-
-        <!-- Typing indicator for the bot -->
-        <div *ngIf="isBotTyping" class="typing-indicator">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
-        </div>
-      </div>
-
-      <div class="chat-input">
-        <input [(ngModel)]="currentMessage" (keyup.enter)="sendMessage()" placeholder="Type a message..." type="text" #messageInput />
-        <button [disabled]="!currentMessage.trim()" (click)="sendMessage()">Send</button>
       </div>
     </div>
+
+    <div class="chat-input">
+      <input [(ngModel)]="currentMessage" (keyup.enter)="sendMessage()" placeholder="Type a message..." type="text" #messageInput />
+      <button [disabled]="!currentMessage.trim()" (click)="sendMessage()">Send</button>
+    </div>
   </div>
+</div>
