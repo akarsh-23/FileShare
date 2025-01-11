@@ -11,7 +11,9 @@
 
     <div class="chat-input">
       <input [(ngModel)]="currentMessage" (keyup.enter)="sendMessage()" placeholder="Type a message..." type="text" #messageInput />
-      <button [disabled]="!currentMessage.trim()" (click)="sendMessage()">Send</button>
+      <button [disabled]="!currentMessage.trim()" (click)="sendMessage()" class="chat-button">
+        <i class="bi bi-send"></i> <!-- Bootstrap send icon -->
+      </button>      
     </div>
   </div>
 </div>
