@@ -125,20 +125,6 @@
   transition: border-color 0.3s;
 }
 
-.chat-input input:focus {
-  border-color: #4CAF50;
-  outline: none;
-}
-
-.chat-input button:hover {
-  background-color: #45a049;
-}
-
-.chat-input button:disabled {
-  background-color: #d3d3d3;
-  cursor: not-allowed;
-}
-
 /* Scrollbar Styling */
 .chat-window::-webkit-scrollbar {
   width: 8px;
@@ -177,7 +163,7 @@
   margin-left: 15px;
   border-radius: 50%;
   border: none;
-  background-color: #4CAF50;
+  background-color: #000000;
   color: white;
   font-size: 20px;
   display: flex;
@@ -188,12 +174,12 @@
 }
 
 .chat-input button:disabled {
-  background-color: #cccccc; /* Grey background when disabled */
+  background-color: #8d8d8d; /* Grey background when disabled */
   cursor: not-allowed; /* No pointer on hover */
 }
 
 .chat-input button:hover:not(:disabled) {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #000000; /* Darker green on hover */
 }
 
 .chat-input button i {
