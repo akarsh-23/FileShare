@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 90vh;
-  background: linear-gradient(135deg, #f8f9fa, #f1f3f5);
+  background: linear-gradient(135deg, #000000, #444444); /* Shades of black */
   padding: 0 10px;
   box-sizing: border-box;
 }
@@ -13,9 +13,9 @@
   height: 100%;
   max-width: 100%;
   max-height: 100vh;
-  background-color: #ffffff;
+  background-color: #ffffff; /* White background */
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Light shadow */
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -23,12 +23,10 @@
   animation: scaleUp 0.5s ease-out;
 }
 
-/* Animation on page load */
 @keyframes scaleUp {
   from {
     transform: scale(0.95);
   }
-
   to {
     transform: scale(1);
   }
@@ -38,8 +36,8 @@
   flex-grow: 1;
   padding: 20px;
   overflow-y: auto;
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #e0e0e0;
+  background-color: #f5f5f5; /* Light gray background */
+  border-bottom: 1px solid #ccc; /* Light gray border */
 }
 
 .message {
@@ -55,7 +53,7 @@
   padding: 12px;
   border-radius: 20px;
   font-size: 16px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
   transition: transform 0.2s ease;
   font-family: 'Arial', sans-serif;
 }
@@ -63,23 +61,22 @@
 .message-content p {
   margin: 0;
   line-height: 1.5;
-  color: #333;
+  color: #000000; /* Black text */
 }
 
-/* User and Bot Messages */
 .user-message .message-content {
-  background-color: #dcf8c6;
+  background-color: #dcdcdc; /* Light gray for user messages */
   align-self: flex-end;
   transform: translateX(10px);
 }
 
 .bot-message .message-content {
-  background-color: #e1e1e1;
+  background-color: #333333; /* Dark gray for bot messages */
+  color: #ffffff; /* White text for bot messages */
   align-self: flex-start;
   transform: translateX(-10px);
 }
 
-/* Typing Indicator */
 .typing-indicator {
   display: flex;
   justify-content: center;
@@ -91,7 +88,7 @@
   width: 8px;
   height: 8px;
   margin: 0 4px;
-  background-color: #888;
+  background-color: #888888; /* Medium gray for typing dots */
   border-radius: 50%;
   animation: blink 1.5s infinite alternate;
 }
@@ -100,46 +97,42 @@
   0% {
     opacity: 0.2;
   }
-
   100% {
     opacity: 1;
   }
 }
 
-/* Input and Button Styling */
 .chat-input {
   display: flex;
   align-items: center;
   padding: 15px;
-  background-color: #ffffff;
-  border-top: 1px solid #e0e0e0;
+  background-color: #ffffff; /* White background */
+  border-top: 1px solid #ccc; /* Light gray border */
 }
 
 .chat-input input {
   width: calc(100% - 70px);
   padding: 12px 15px;
   border-radius: 25px;
-  border: 1px solid #ccc;
+  border: 1px solid #bbb; /* Light gray border */
   font-size: 16px;
-  background-color: #f7f7f7;
+  background-color: #f7f7f7; /* Light gray background */
   transition: border-color 0.3s;
 }
 
-/* Scrollbar Styling */
 .chat-window::-webkit-scrollbar {
   width: 8px;
 }
 
 .chat-window::-webkit-scrollbar-thumb {
-  background-color: #888;
+  background-color: #888888; /* Medium gray scrollbar */
   border-radius: 10px;
 }
 
 .chat-window::-webkit-scrollbar-thumb:hover {
-  background-color: #555;
+  background-color: #555555; /* Darker gray scrollbar on hover */
 }
 
-/* Responsive Styling */
 @media screen and (max-width: 768px) {
   .chat-container {
     max-height: 100vh;
@@ -163,7 +156,7 @@
   margin-left: 15px;
   border-radius: 50%;
   border: none;
-  background-color: #000000;
+  background-color: #000000; /* Black button */
   color: white;
   font-size: 20px;
   display: flex;
@@ -174,14 +167,14 @@
 }
 
 .chat-input button:disabled {
-  background-color: #8d8d8d; /* Grey background when disabled */
-  cursor: not-allowed; /* No pointer on hover */
+  background-color: #555555; /* Darker gray when disabled */
+  cursor: not-allowed;
 }
 
 .chat-input button:hover:not(:disabled) {
-  background-color: #000000; /* Darker green on hover */
+  background-color: #333333; /* Dark gray on hover */
 }
 
 .chat-input button i {
-  font-size: 20px; /* Ensures icon is the correct size */
+  font-size: 20px;
 }
