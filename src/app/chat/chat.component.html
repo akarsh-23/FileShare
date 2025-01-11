@@ -3,7 +3,6 @@
     <div class="chat-window" #chatWindow>
       <div *ngFor="let message of messages" class="message" [ngClass]="{ 'user-message': message.user === 'You', 'bot-message': message.user === 'Bot' }">
         <div class="message-content">
-          <strong>{{ message.user }}:</strong>
           <p>{{ message.text }}</p>
         </div>
       </div>
@@ -11,8 +10,8 @@
 
     <div class="chat-input">
       <input [(ngModel)]="currentMessage" (keyup.enter)="sendMessage()" placeholder="Type a message..." type="text" #messageInput />
-      <button [disabled]="!currentMessage.trim()" (click)="sendMessage()" class="chat-button">
-        <i class="bi bi-send"></i> <!-- Bootstrap send icon -->
+      <button [disabled]="!currentMessage.trim()" (click)="sendMessage()">
+        <i class="bi bi-send"></i>
       </button>      
     </div>
   </div>
